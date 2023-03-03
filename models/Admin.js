@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 
 const AdminSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: [true, "please provide name"],
+    required: [true, "Please provide first name"],
+    trim: true,
+    minlength: 3,
+  },
+  
+  lastName: {
+    type: String,
+    required: [true, "please provide last name"],
     trim: true,
     minlength: 3,
   },
@@ -37,10 +44,20 @@ const AdminSchema = new mongoose.Schema({
   },
 });
 
-
-// AdminSchema.pre('save', async function(){
-//  const salt = await bcrypt.genSalt(10);
-//     this.password = await bcrypt.hash(this.password, salt);
-// })
+AdminSchema.pre('save', async function(){
+  const salt = await bcrypt.genSalt(10);
+     this.password = await bcrypt.hash(this.password, salt);
+ })
+ 
+ AdminSchema.methods.createToken = function(){
+     return jwt.sign(
+       { userId: this._id, email: this.email },
+       process.env.JWT_SECRET,
+       {
+         expiresIn: process.env.JWT_LIFETIME,
+       }
+     );
+   }
+ 
 
 module.exports = mongoose.model("Admin", AdminSchema);

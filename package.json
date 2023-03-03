@@ -1,7 +1,6 @@
 {
   "name": "grocery",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +16,14 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omkapadia25/Grocery_Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omkapadia25/Grocery_Backend/issues"
+  },
+  "homepage": "https://github.com/omkapadia25/Grocery_Backend#readme",
+  "description": ""
 }
